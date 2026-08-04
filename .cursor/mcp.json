@@ -1,24 +1,8 @@
 {
   "mcpServers": {
-    "hostinger-hosting": {
+    "hostinger-api": {
       "command": "npx",
-      "args": ["-y", "-p", "hostinger-api-mcp@latest", "hostinger-hosting-mcp"],
-      "env": {
-        "DEBUG": "false",
-        "HOSTINGER_API_TOKEN": "${env:HOSTINGER_API_TOKEN}"
-      }
-    },
-    "hostinger-domains": {
-      "command": "npx",
-      "args": ["-y", "-p", "hostinger-api-mcp@latest", "hostinger-domains-mcp"],
-      "env": {
-        "DEBUG": "false",
-        "HOSTINGER_API_TOKEN": "${env:HOSTINGER_API_TOKEN}"
-      }
-    },
-    "hostinger-wordpress": {
-      "command": "npx",
-      "args": ["-y", "-p", "hostinger-api-mcp@latest", "hostinger-wordpress-mcp"],
+      "args": ["-y", "hostinger-api-mcp@latest"],
       "env": {
         "DEBUG": "false",
         "HOSTINGER_API_TOKEN": "${env:HOSTINGER_API_TOKEN}"
