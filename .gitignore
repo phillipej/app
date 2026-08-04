@@ -1,0 +1,6 @@
+.netlify
+.env
+.env.*
+!.env.example
+*.pem
+credentials.json
