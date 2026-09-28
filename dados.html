@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GHW — Normalização de dados</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-dot">G</span>
+      <span><strong>GHW Central</strong><small>reuso do escritório</small></span>
+    </div>
+    <nav>
+      <p class="nav-label">Funções</p>
+      <a class="nav-item" href="index.html">Funções prontas</a>
+      <p class="nav-label">Dados</p>
+      <a class="nav-item active" href="dados.html">Normalização de dados</a>
+    </nav>
+    <div class="user-card">
+      <span class="avatar">P</span>
+      <span><strong>Phillipe</strong><small>Contabilidade Várzea Muda</small></span>
+      <span class="db">● base ghw_dados · conectada</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <span class="crumb">GHW / Normalização de dados</span>
+      <nav class="tabs" aria-label="Partes do produto">
+        <a class="tab" href="index.html">Funções</a>
+        <a class="tab active" href="dados.html" aria-current="page">Normalização de dados</a>
+      </nav>
+      <button class="btn-primary" id="btnImportar" type="button">+ Importar arquivo</button>
+    </header>
+
+    <div class="flow">
+      <span><strong>1.</strong> bruto entra uma vez</span><i>→</i>
+      <span><strong>2.</strong> GHW normaliza</span><i>→</i>
+      <span><strong>3.</strong> apps leem</span>
+    </div>
+
+    <h1>Normalização de dados <small>importar o bruto e conferir por empresa e tipo</small></h1>
+    <p class="muted">O bruto entra uma única vez por aqui. Os apps leem este resultado — sem cópia local, sem reimportar, sem detalhe de nota fiscal.</p>
+
+    <div id="dados"></div>
+  </div>
+
+  <!-- Popup importar -->
+  <div class="overlay" id="overlayImportar" hidden>
+    <div class="popup" role="dialog" aria-modal="true" aria-labelledby="impTitulo">
+      <header>
+        <div><h2 id="impTitulo">Importar arquivo</h2><p>O arquivo entra uma única vez. O GHW identifica, normaliza e grava em ghw_dados.</p></div>
+        <button class="x" id="impFechar" type="button" aria-label="Fechar">×</button>
+      </header>
+      <label class="drop" for="impFile">Arraste a NF-e, o extrato ou a folha para cá — ou clique para escolher<input id="impFile" type="file" hidden /></label>
+      <p class="copiado" id="impOk" hidden>Recebido. Na versão inicial o envio é ilustrativo — o fluxo real está no manual.</p>
+      <div class="pop-actions">
+        <button class="btn-primary grow" id="impEnviar" type="button">Enviar para normalizar</button>
+        <button class="btn-ghost" id="impFechar2" type="button">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="dados.js"></script>
+</body>
+</html>

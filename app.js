@@ -1,8 +1,7 @@
-// GHW Dashboard — catálogo lido dos manifests em functions/*/manifest.json.
+// GHW — Funções prontas. Catálogo lido dos manifests em functions/*/manifest.json.
 const lista = document.getElementById("lista");
 const busca = document.getElementById("busca");
 const overlay = document.getElementById("overlay");
-const overlayImportar = document.getElementById("overlayImportar");
 let funcoes = [];
 let filtro = "todas";
 let atual = null;
@@ -39,7 +38,7 @@ function render() {
     return;
   }
   lista.innerHTML = itens
-    .map((f, i) => {
+    .map((f) => {
       const pronta = f.estado === "pronta";
       return `<li class="linha">
         <span class="ponto ${f.estado}" aria-hidden="true"></span>
@@ -99,27 +98,6 @@ async function copiarChamada() {
   document.getElementById("popOk").hidden = false;
 }
 
-async function carregarDados() {
-  const res = await fetch("/api/dados");
-  const dados = await res.json();
-  document.getElementById("dados").innerHTML = dados.empresas
-    .map(
-      (e) => `<div class="empresa"><h3>${e.nome}</h3>
-        <table class="tabela"><tr><th>Tipo</th><th>Quantidade</th><th>Estado</th></tr>
-        ${e.arquivos.map((a) => `<tr><td>${a.tipo}</td><td>${a.quantidade}</td><td>${a.estado}</td></tr>`).join("")}
-        </table></div>`
-    )
-    .join("");
-}
-
-function rotear() {
-  const dados = location.hash === "#/dados";
-  document.getElementById("visaoCatalogo").hidden = dados;
-  document.getElementById("visaoDados").hidden = !dados;
-  document.getElementById("crumb").textContent = dados ? "Central / Dados normalizados" : "Central / Catálogo";
-  if (dados) carregarDados();
-}
-
 document.querySelectorAll(".filtro").forEach((b) =>
   b.addEventListener("click", () => {
     document.querySelectorAll(".filtro").forEach((x) => x.classList.remove("active"));
@@ -137,28 +115,7 @@ overlay.addEventListener("click", (e) => {
   if (e.target === overlay) fecharDetalhe();
 });
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    fecharDetalhe();
-    overlayImportar.hidden = true;
-  }
+  if (e.key === "Escape") fecharDetalhe();
 });
 
-const abrirImportar = () => {
-  document.getElementById("impOk").hidden = true;
-  overlayImportar.hidden = false;
-};
-const fecharImportar = () => (overlayImportar.hidden = true);
-document.getElementById("btnImportarTopo").addEventListener("click", abrirImportar);
-document.getElementById("navImportar").addEventListener("click", abrirImportar);
-document.getElementById("impFechar").addEventListener("click", fecharImportar);
-document.getElementById("impFechar2").addEventListener("click", fecharImportar);
-overlayImportar.addEventListener("click", (e) => {
-  if (e.target === overlayImportar) fecharImportar();
-});
-document.getElementById("impEnviar").addEventListener("click", () => {
-  document.getElementById("impOk").hidden = false;
-});
-
-window.addEventListener("hashchange", rotear);
-rotear();
 carregar();

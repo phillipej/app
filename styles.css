@@ -69,9 +69,17 @@ body {
   z-index: 5;
 }
 .crumb { font-size: 13px; font-weight: 700; white-space: nowrap; }
+.tabs {
+  display: flex; background: #dde3ef; border-radius: 12px; padding: 4px; gap: 2px;
+}
+.tab {
+  text-decoration: none; font-size: 12px; font-weight: 700; color: var(--suave);
+  padding: 7px 16px; border-radius: 9px; white-space: nowrap;
+}
+.tab.active { background: #fff; color: var(--tinta); box-shadow: 0 1px 4px rgba(0, 0, 0, .12); }
 #busca {
-  flex: 1; max-width: 460px; border: 1px solid var(--borda);
-  border-radius: 10px; padding: 9px 12px; background: #f7f9fc;
+  width: 100%; max-width: 460px; border: 1px solid var(--borda);
+  border-radius: 10px; padding: 9px 12px; background: #f7f9fc; margin-top: 14px;
 }
 .btn-primary {
   margin-left: auto; background: var(--indigo); color: #fff; border: 0;
