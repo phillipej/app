@@ -4,11 +4,8 @@ const busca = document.getElementById("busca");
 const overlay = document.getElementById("overlay");
 const popup = document.getElementById("popup");
 const contagem = document.getElementById("contagem");
-const limparBtn = document.getElementById("limpar");
-const donosBox = document.getElementById("donos");
 let funcoes = [];
 let estado = "todas";
-let donos = new Set();
 let ultimaCapa = null;
 let atual = null;
 
@@ -51,11 +48,7 @@ function pontos(f, termo) {
 
 function visiveis() {
   const termo = norm(busca.value.trim());
-  const lista = funcoes.filter((f) => {
-    if (estado !== "todas" && f.estado !== estado) return false;
-    if (donos.size && !donos.has(f.dono)) return false;
-    return true;
-  });
+  const lista = funcoes.filter((f) => estado === "todas" || f.estado === estado);
   if (!termo) return lista.sort(ordemPadrao);
   return lista
     .map((f) => ({ f, p: pontos(f, termo) }))
@@ -84,11 +77,8 @@ function realcar(nome, termoBruto) {
 function render() {
   const itens = visiveis();
   contagem.textContent = `${itens.length} de ${funcoes.length}`;
-  const sujo = busca.value.trim() !== "" || estado !== "todas" || donos.size > 0;
-  limparBtn.hidden = !sujo;
   if (!itens.length) {
-    grade.innerHTML = `<div class="vazio">Nenhuma função com esse texto.<br><button class="btn-detalhe" id="vazioLimpar" type="button">Limpar busca e filtros</button></div>`;
-    document.getElementById("vazioLimpar").addEventListener("click", limparTudo);
+    grade.innerHTML = `<div class="vazio">Nenhuma função com esse texto.</div>`;
     return;
   }
   grade.innerHTML = itens
@@ -106,33 +96,10 @@ function render() {
   );
 }
 
-function renderDonos() {
-  const lista = [...new Set(funoesDono())].sort((a, b) => norm(a).localeCompare(norm(b), "pt-BR"));
-  donosBox.innerHTML = lista
-    .map((d) => `<button class="dono${donos.has(d) ? " on" : ""}" data-dono="${d}" type="button" aria-pressed="${donos.has(d)}">${d.replace("Equipe ", "")}</button>`)
-    .join("");
-  donosBox.querySelectorAll(".dono").forEach((b) =>
-    b.addEventListener("click", () => {
-      const d = b.dataset.dono;
-      if (donos.has(d)) donos.delete(d);
-      else donos.add(d);
-      renderDonos();
-      render();
-    })
-  );
-}
-function funoesDono() {
-  return funcoes.map((f) => f.dono);
-}
-
-function limparTudo() {
-  busca.value = "";
-  estado = "todas";
-  donos.clear();
-  document.querySelectorAll(".seg-btn").forEach((x) => x.classList.toggle("active", x.dataset.estado === "todas"));
-  renderDonos();
+async function carregar() {
+  const res = await fetch("/api/functions");
+  funcoes = await res.json();
   render();
-  busca.focus();
 }
 
 function abrirDetalhe(f, capa) {
@@ -184,8 +151,6 @@ async function copiarChamada(f) {
 async function carregar() {
   const res = await fetch("/api/functions");
   funcoes = await res.json();
-  document.getElementById("navCount").textContent = `${funcoes.length} funções`;
-  renderDonos();
   render();
 }
 
@@ -205,7 +170,6 @@ busca.addEventListener("input", () => {
   clearTimeout(debounce);
   debounce = setTimeout(render, 100);
 });
-limparBtn.addEventListener("click", limparTudo);
 document.getElementById("popFechar").addEventListener("click", fecharDetalhe);
 document.getElementById("popFechar2").addEventListener("click", fecharDetalhe);
 document.getElementById("popCopiar").addEventListener("click", () => {

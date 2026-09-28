@@ -6,48 +6,27 @@
   <title>GHW — Funções</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <aside class="sidebar">
-    <div class="brand">
-      <span class="brand-dot">G</span>
-      <span><strong>GHW Central</strong><small>reuso do escritório</small></span>
-    </div>
-    <nav>
-      <p class="nav-label">Funções</p>
-      <a class="nav-item active" href="index.html">Funções <span class="count" id="navCount">4 funções</span></a>
-      <p class="nav-label">Dados</p>
-      <a class="nav-item" href="dados.html">Normalização de dados</a>
-    </nav>
-    <div class="user-card">
-      <span class="avatar">P</span>
-      <span><strong>Phillipe</strong><small>Contabilidade Várzea Muda</small></span>
-      <span class="db">● base ghw_dados · conectada</span>
-    </div>
-  </aside>
-
-  <div class="main">
-    <header class="topbar">
-      <span class="crumb">GHW / Funções</span>
-      <nav class="tabs" aria-label="Partes do produto">
-        <a class="tab active" href="index.html" aria-current="page">Funções</a>
-        <a class="tab" href="dados.html">Normalização de dados</a>
-      </nav>
+<body class="loja">
+  <div class="pagina">
+    <header class="loja-topo">
+      <div class="loja-marca"><strong>GHW</strong><span>funções prontas do escritório — app novo chama, não copia</span></div>
+      <input id="busca" type="search" placeholder="Buscar função ou dono  ( / )" aria-label="Buscar função ou dono" autocomplete="off" />
     </header>
 
-    <input id="busca" type="search" placeholder="Buscar função ou dono  ( / )" aria-label="Buscar função ou dono" autocomplete="off" />
-
-    <div class="filtros" aria-label="Filtros do catálogo">
+    <div class="loja-linha">
       <div class="seg" role="group" aria-label="Estado">
         <button class="seg-btn active" data-estado="todas" type="button">Todas</button>
         <button class="seg-btn" data-estado="pronta" type="button">Prontas</button>
         <button class="seg-btn" data-estado="prevista" type="button">Previstas</button>
       </div>
-      <div class="donos" id="donos" role="group" aria-label="Dono"></div>
       <span class="contagem" id="contagem"></span>
-      <button class="limpar" id="limpar" type="button" hidden>Limpar ×</button>
     </div>
 
-    <div class="grade" id="grade"></div>
+    <main class="grade" id="grade"></main>
+
+    <footer class="loja-rodape">
+      <a href="dados.html">Ver dados normalizados por empresa e tipo de arquivo →</a>
+    </footer>
   </div>
 
   <!-- Popup de contrato -->

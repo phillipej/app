@@ -6,45 +6,20 @@
   <title>GHW — Normalização de dados</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <aside class="sidebar">
-    <div class="brand">
-      <span class="brand-dot">G</span>
-      <span><strong>GHW Central</strong><small>reuso do escritório</small></span>
-    </div>
-    <nav>
-      <p class="nav-label">Funções</p>
-      <a class="nav-item" href="index.html">Funções prontas</a>
-      <p class="nav-label">Dados</p>
-      <a class="nav-item active" href="dados.html">Normalização de dados</a>
-    </nav>
-    <div class="user-card">
-      <span class="avatar">P</span>
-      <span><strong>Phillipe</strong><small>Contabilidade Várzea Muda</small></span>
-      <span class="db">● base ghw_dados · conectada</span>
-    </div>
-  </aside>
-
-  <div class="main">
-    <header class="topbar">
-      <span class="crumb">GHW / Normalização de dados</span>
-      <nav class="tabs" aria-label="Partes do produto">
-        <a class="tab" href="index.html">Funções</a>
-        <a class="tab active" href="dados.html" aria-current="page">Normalização de dados</a>
-      </nav>
+<body class="loja">
+  <div class="pagina">
+    <header class="loja-topo">
+      <div class="loja-marca"><strong>GHW</strong><span>normalização de dados — o bruto entra uma vez</span></div>
       <button class="btn-primary" id="btnImportar" type="button">+ Importar arquivo</button>
     </header>
 
-    <div class="flow">
-      <span><strong>1.</strong> bruto entra uma vez</span><i>→</i>
-      <span><strong>2.</strong> GHW normaliza</span><i>→</i>
-      <span><strong>3.</strong> apps leem</span>
-    </div>
+    <p class="muted">Os apps leem este resultado — sem cópia local, sem reimportar, sem detalhe de nota fiscal.</p>
 
-    <h1>Normalização de dados <small>importar o bruto e conferir por empresa e tipo</small></h1>
-    <p class="muted">O bruto entra uma única vez por aqui. Os apps leem este resultado — sem cópia local, sem reimportar, sem detalhe de nota fiscal.</p>
+    <main id="dados"></main>
 
-    <div id="dados"></div>
+    <footer class="loja-rodape">
+      <a href="index.html">← Voltar às funções</a>
+    </footer>
   </div>
 
   <!-- Popup importar -->
