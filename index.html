@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GHW — Funções prontas</title>
+  <title>GHW — Funções</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -14,7 +14,7 @@
     </div>
     <nav>
       <p class="nav-label">Funções</p>
-      <a class="nav-item active" href="index.html">Funções prontas <span class="count" id="navCount">4 funções</span></a>
+      <a class="nav-item active" href="index.html">Funções <span class="count" id="navCount">4 funções</span></a>
       <p class="nav-label">Dados</p>
       <a class="nav-item" href="dados.html">Normalização de dados</a>
     </nav>
@@ -27,29 +27,32 @@
 
   <div class="main">
     <header class="topbar">
-      <span class="crumb">GHW / Funções prontas</span>
+      <span class="crumb">GHW / Funções</span>
       <nav class="tabs" aria-label="Partes do produto">
         <a class="tab active" href="index.html" aria-current="page">Funções</a>
         <a class="tab" href="dados.html">Normalização de dados</a>
       </nav>
     </header>
 
-    <input id="busca" type="search" placeholder="Buscar função, contrato, dono…" aria-label="Buscar função" />
+    <input id="busca" type="search" placeholder="Buscar função ou dono  ( / )" aria-label="Buscar função ou dono" autocomplete="off" />
 
-    <h1>Funções prontas <small>o que o escritório já sabe fazer — app novo chama, não copia</small></h1>
-
-    <div class="filtros" role="tablist" aria-label="Filtrar por estado">
-      <button class="filtro active" data-filtro="todas" type="button">Todas · <b id="cTodas">4</b></button>
-      <button class="filtro" data-filtro="pronta" type="button">Prontas · <b id="cProntas">2</b></button>
-      <button class="filtro" data-filtro="prevista" type="button">Previstas · <b id="cPrevistas">2</b></button>
+    <div class="filtros" aria-label="Filtros do catálogo">
+      <div class="seg" role="group" aria-label="Estado">
+        <button class="seg-btn active" data-estado="todas" type="button">Todas</button>
+        <button class="seg-btn" data-estado="pronta" type="button">Prontas</button>
+        <button class="seg-btn" data-estado="prevista" type="button">Previstas</button>
+      </div>
+      <div class="donos" id="donos" role="group" aria-label="Dono"></div>
+      <span class="contagem" id="contagem"></span>
+      <button class="limpar" id="limpar" type="button" hidden>Limpar ×</button>
     </div>
 
-    <ul class="lista" id="lista"></ul>
+    <div class="grade" id="grade"></div>
   </div>
 
-  <!-- Popup de detalhe -->
+  <!-- Popup de contrato -->
   <div class="overlay" id="overlay" hidden>
-    <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popNome">
+    <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popNome" tabindex="-1" id="popup">
       <header>
         <div><h2 id="popNome"></h2><p id="popDesc"></p></div>
         <span class="selo" id="popEstado"></span>
@@ -69,6 +72,7 @@
         <button class="btn-primary grow" id="popCopiar" type="button">Copiar chamada</button>
         <button class="btn-ghost" id="popFechar2" type="button">Fechar</button>
       </div>
+      <p class="aviso" id="popAviso" hidden>Ainda não pode ser chamada — aguarde a versão pronta, não copie o rascunho.</p>
       <p class="copiado" id="popOk" hidden>Chamada copiada — cole no seu app.</p>
     </div>
   </div>
