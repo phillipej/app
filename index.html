@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GHW Central — Catálogo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-dot">G</span>
+      <span><strong>GHW Central</strong><small>reuso do escritório</small></span>
+    </div>
+    <nav>
+      <p class="nav-label">Console</p>
+      <a class="nav-item active" href="#/" data-nav="catalogo">Catálogo <span class="count" id="navCount">4 funções</span></a>
+      <a class="nav-item" href="#/importar" id="navImportar">Importações</a>
+      <a class="nav-item" href="#/dados" data-nav="dados">Dados normalizados <span class="ghost">à parte</span></a>
+      <a class="nav-item" href="#/" data-nav="apps">Apps conectados</a>
+      <p class="nav-label">Sistema</p>
+      <a class="nav-item" href="#/" data-nav="contratos">Contratos e versões</a>
+    </nav>
+    <div class="user-card">
+      <span class="avatar">P</span>
+      <span><strong>Phillipe</strong><small>Contabilidade Várzea Muda</small></span>
+      <span class="db">● base ghw_dados · conectada</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <span class="crumb" id="crumb">Central / Catálogo</span>
+      <input id="busca" type="search" placeholder="Buscar função, contrato, dono…" aria-label="Buscar função" />
+      <button class="btn-primary" id="btnImportarTopo" type="button">+ Importar arquivo</button>
+    </header>
+
+    <!-- Visão: catálogo -->
+    <section id="visaoCatalogo">
+      <div class="flow">
+        <span><strong>1.</strong> entra uma vez</span><i>→</i>
+        <span><strong>2.</strong> GHW normaliza</span><i>→</i>
+        <span><strong>3.</strong> apps leem</span>
+      </div>
+
+      <h1>Catálogo <small>o que o escritório já sabe fazer — app novo chama, não copia</small></h1>
+
+      <div class="filtros" role="tablist" aria-label="Filtrar por estado">
+        <button class="filtro active" data-filtro="todas" type="button">Todas · <b id="cTodas">4</b></button>
+        <button class="filtro" data-filtro="pronta" type="button">Prontas · <b id="cProntas">2</b></button>
+        <button class="filtro" data-filtro="prevista" type="button">Previstas · <b id="cPrevistas">2</b></button>
+      </div>
+
+      <ul class="lista" id="lista"></ul>
+
+      <p class="dados-link">⊕ Precisa conferir números? <a href="#/dados">Ver dados normalizados por empresa e tipo de arquivo →</a></p>
+    </section>
+
+    <!-- Visão: dados normalizados -->
+    <section id="visaoDados" hidden>
+      <h1>Dados normalizados <small>só quantidade e estado, por empresa e tipo</small></h1>
+      <p class="muted">O bruto entra uma única vez pelo GHW. Apps leem este resultado — sem cópia local, sem reimportar.</p>
+      <div id="dados"></div>
+      <p class="dados-link">← <a href="#/">Voltar ao catálogo</a></p>
+    </section>
+  </div>
+
+  <!-- Popup de detalhe -->
+  <div class="overlay" id="overlay" hidden>
+    <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popNome">
+      <header>
+        <div><h2 id="popNome"></h2><p id="popDesc"></p></div>
+        <span class="selo" id="popEstado"></span>
+        <button class="x" id="popFechar" type="button" aria-label="Fechar">×</button>
+      </header>
+      <div class="pop-grid">
+        <div class="pop-box"><small>Versão</small><strong id="popVersao"></strong><span id="popVersaoNota"></span></div>
+        <div class="pop-box"><small>Dono</small><strong id="popDono"></strong><span id="popDonoNota"></span></div>
+      </div>
+      <small class="lbl">Entrada</small>
+      <code class="contract" id="popEntrada"></code>
+      <small class="lbl">Saída</small>
+      <code class="contract" id="popSaida"></code>
+      <small class="lbl" id="popQuemLbl"></small>
+      <div class="chips" id="popQuem"></div>
+      <div class="pop-actions">
+        <button class="btn-primary grow" id="popCopiar" type="button">Copiar chamada</button>
+        <button class="btn-ghost" id="popFechar2" type="button">Fechar</button>
+      </div>
+      <p class="copiado" id="popOk" hidden>Chamada copiada — cole no seu app.</p>
+    </div>
+  </div>
+
+  <!-- Popup importar -->
+  <div class="overlay" id="overlayImportar" hidden>
+    <div class="popup" role="dialog" aria-modal="true" aria-labelledby="impTitulo">
+      <header>
+        <div><h2 id="impTitulo">Importar arquivo</h2><p>O arquivo entra uma única vez. O GHW identifica, normaliza e grava em ghw_dados.</p></div>
+        <button class="x" id="impFechar" type="button" aria-label="Fechar">×</button>
+      </header>
+      <label class="drop" for="impFile">Arraste a NF-e, o extrato ou a folha para cá — ou clique para escolher<input id="impFile" type="file" hidden /></label>
+      <p class="copiado" id="impOk" hidden>Recebido. Na versão inicial o envio é ilustrativo — o fluxo real está no manual.</p>
+      <div class="pop-actions">
+        <button class="btn-primary grow" id="impEnviar" type="button">Enviar para normalizar</button>
+        <button class="btn-ghost" id="impFechar2" type="button">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

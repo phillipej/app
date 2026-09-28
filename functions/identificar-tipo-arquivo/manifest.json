@@ -1,0 +1,15 @@
+{
+  "nome": "Identificar tipo de arquivo",
+  "descricao": "NF-e, extrato e folha ganham o mesmo rótulo",
+  "versao": "v1.4",
+  "versao_estado": "estável",
+  "versao_nota": "contrato congelado desde fev/2026",
+  "dono": "Equipe Entrada",
+  "dono_nota": "revê novos layouts de banco",
+  "estado": "pronta",
+  "uso": "4 apps",
+  "quem_chama": ["App Conciliação", "App Importador", "App Fechamento Mensal", "App Folha Auxiliar"],
+  "entrada": "arquivo_bruto (qualquer) → ghw.importar()",
+  "saida": "rotulo { tipo: \"NF-e\" | \"extrato\" | \"folha\" }",
+  "chamada": "const tipo = ghw.identificarTipoArquivo(arquivoBruto);"
+}

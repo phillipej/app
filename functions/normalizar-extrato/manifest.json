@@ -1,0 +1,15 @@
+{
+  "nome": "Normalizar extrato",
+  "descricao": "Um formato só — aguardar, não reescrever",
+  "versao": "prevista",
+  "versao_estado": "em desenho",
+  "versao_nota": "entra no catálogo quando o contrato congelar",
+  "dono": "Equipe Conciliação",
+  "dono_nota": "define o formato único de lançamento",
+  "estado": "prevista",
+  "uso": "2 na fila",
+  "quem_chama": ["App Conciliação", "App Fechamento Mensal"],
+  "entrada": "arquivo_bruto (extrato) → ghw.importar()",
+  "saida": "extrato_normalizado { empresa, lançamentos[] }",
+  "chamada": "const extrato = ghw.normalizarExtrato(arquivoBruto);"
+}
