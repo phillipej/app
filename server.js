@@ -50,6 +50,11 @@ const server = http.createServer((req, res) => {
 
   if (url.pathname === "/api/dados") {
     const file = path.join(ROOT, "data", "dados.json");
+    if (!fs.existsSync(file)) {
+      res.writeHead(404, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ erro: "data/dados.json não encontrado" }));
+      return;
+    }
     res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
     res.end(fs.readFileSync(file, "utf-8"));
     return;
@@ -69,6 +74,16 @@ const server = http.createServer((req, res) => {
   }
   res.writeHead(200, { "Content-Type": MIME[path.extname(file)] || "application/octet-stream" });
   fs.createReadStream(file).pipe(res);
+});
+
+server.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    console.error(
+      `A porta ${PORT} já está em uso. Feche o outro processo ou rode com outra porta: PORT=3000 npm start`
+    );
+    process.exit(1);
+  }
+  throw err;
 });
 
 server.listen(PORT, () => {
