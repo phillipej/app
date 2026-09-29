@@ -9,7 +9,7 @@
   "estado": "prevista",
   "uso": "2 na fila",
   "quem_chama": ["App Conciliação", "App Fechamento Mensal"],
-  "entrada": "arquivo_bruto (extrato) → ghw.importar()",
+  "entrada": "arquivo_bruto (extrato) → require(\"./ghw\") (quando pronta)",
   "saida": "extrato_normalizado { empresa, lançamentos[] }",
   "chamada": "const { normalizarExtrato } = require(\"./ghw\");\nconst extrato = normalizarExtrato(arquivoBruto);"
 }

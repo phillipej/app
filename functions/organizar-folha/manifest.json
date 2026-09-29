@@ -9,7 +9,7 @@
   "estado": "prevista",
   "uso": "1 na fila",
   "quem_chama": ["App Folha Auxiliar"],
-  "entrada": "arquivo_bruto (folha) → ghw.importar()",
+  "entrada": "arquivo_bruto (folha) → require(\"./ghw\") (quando pronta)",
   "saida": "folha_organizada { empresa, funcionários[] }",
   "chamada": "const { organizarFolha } = require(\"./ghw\");\nconst folha = organizarFolha(arquivoBruto);"
 }
