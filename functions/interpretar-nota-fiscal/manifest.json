@@ -1,15 +1,15 @@
 {
   "nome": "Interpretar nota fiscal",
-  "descricao": "Bruto da NF-e vira estrutura única",
-  "versao": "v2.1",
+  "descricao": "Lê o XML da NF-e e devolve a estrutura única",
+  "versao": "v2.2",
   "versao_estado": "estável",
-  "versao_nota": "contrato congelado desde mar/2026",
+  "versao_nota": "lê o XML de verdade desde set/2026: chave, emitente, itens, totais",
   "dono": "Equipe Fiscal",
   "dono_nota": "revê mudanças de regra",
   "estado": "pronta",
   "uso": "3 apps",
   "quem_chama": ["App Conciliação", "App Fechamento Mensal", "App Conferência Fiscal"],
-  "entrada": "arquivo_bruto (NF-e) → ghw.importar()",
-  "saida": "estrutura_normalizada { empresa, tipo: \"NF-e\", estado }",
-  "chamada": "const nf = ghw.interpretarNotaFiscal(arquivoBruto);"
+  "entrada": "xml_nfe (texto do XML) → require(\"./ghw\")",
+  "saida": "estrutura_normalizada { chave, emitente, destinatario, dataEmissao, itens[], totais }",
+  "chamada": "const { interpretarNotaFiscal } = require(\"./ghw\");\nconst nf = interpretarNotaFiscal(xmlDaNFe);"
 }

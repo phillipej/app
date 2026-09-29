@@ -39,8 +39,52 @@ function listFunctions() {
     });
 }
 
-const server = http.createServer((req, res) => {
+const { identificarTipoArquivo, interpretarNotaFiscal } = require("./ghw");
+
+function lerCorpo(req) {
+  return new Promise((resolve, reject) => {
+    let corpo = "";
+    req.on("data", (p) => {
+      corpo += p;
+      if (corpo.length > 5 * 1024 * 1024) reject(new Error("arquivo grande demais (5 MB)"));
+    });
+    req.on("end", () => resolve(corpo));
+    req.on("error", reject);
+  });
+}
+
+const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
+
+  if (req.method === "POST" && url.pathname === "/api/normalizar") {
+    try {
+      const { nome, conteudo } = JSON.parse(await lerCorpo(req));
+      const { tipo } = identificarTipoArquivo({ nome });
+      if (tipo === "NF-e") {
+        const nota = interpretarNotaFiscal(conteudo ?? "");
+        res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+        res.end(JSON.stringify({ tipo, resultado: nota }));
+        return;
+      }
+      const motivo =
+        tipo === "desconhecido"
+          ? "tipo não identificado pelo nome do arquivo"
+          : `a função de ${tipo} ainda está prevista — arquivo recusado, nada foi gravado`;
+      res.writeHead(422, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ tipo, erro: motivo }));
+    } catch (err) {
+      const codigo = /XML|obrigatório|Esperava/i.test(err.message) ? 422 : 400;
+      res.writeHead(codigo, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ erro: err.message }));
+    }
+    return;
+  }
+
+  if (req.method !== "GET") {
+    res.writeHead(405);
+    res.end("método não permitido");
+    return;
+  }
 
   if (url.pathname === "/api/functions") {
     res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
