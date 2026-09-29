@@ -1,0 +1,28 @@
+{
+  "base": "ghw_dados",
+  "atualizado_em": "29/09/2026",
+  "empresas": [
+    {
+      "nome": "Padaria Pão Dourado",
+      "arquivos": [
+        { "tipo": "NF-e", "quantidade": 128, "estado": "normalizado" },
+        { "tipo": "Extrato", "quantidade": 12, "estado": "pendente" },
+        { "tipo": "Folha", "quantidade": 3, "estado": "pendente" }
+      ]
+    },
+    {
+      "nome": "Oficina Motor Forte",
+      "arquivos": [
+        { "tipo": "NF-e", "quantidade": 86, "estado": "normalizado" },
+        { "tipo": "Extrato", "quantidade": 9, "estado": "pendente" }
+      ]
+    },
+    {
+      "nome": "Clínica Vida Leve",
+      "arquivos": [
+        { "tipo": "NF-e", "quantidade": 54, "estado": "normalizado" },
+        { "tipo": "Folha", "quantidade": 4, "estado": "pendente" }
+      ]
+    }
+  ]
+}

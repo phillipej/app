@@ -1,0 +1,11 @@
+{
+  "name": "ghw-dashboard",
+  "version": "0.1.0",
+  "description": "GHW Dashboard — catálogo de funções reaproveitáveis do escritório",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

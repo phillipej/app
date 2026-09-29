@@ -1,0 +1,15 @@
+{
+  "nome": "Organizar folha",
+  "descricao": "Separada por empresa — sem cópia local",
+  "versao": "prevista",
+  "versao_estado": "em desenho",
+  "versao_nota": "entra no catálogo quando o contrato congelar",
+  "dono": "Equipe Pessoal",
+  "dono_nota": "valida rubricas com o escritório",
+  "estado": "prevista",
+  "uso": "1 na fila",
+  "quem_chama": ["App Folha Auxiliar"],
+  "entrada": "arquivo_bruto (folha) → require(\"./ghw\") (quando pronta)",
+  "saida": "folha_organizada { empresa, funcionários[] }",
+  "chamada": "const { organizarFolha } = require(\"./ghw\");\nconst folha = organizarFolha(arquivoBruto);"
+}

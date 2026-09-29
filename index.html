@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GHW — Funções</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="loja">
+  <div class="pagina">
+    <header class="loja-topo">
+      <div class="loja-marca"><strong>GHW</strong><span>funções prontas do escritório — app novo chama, não copia</span></div>
+      <input id="busca" type="search" placeholder="Buscar função ou dono  ( / )" aria-label="Buscar função ou dono" autocomplete="off" />
+    </header>
+
+    <div class="loja-linha">
+      <div class="seg" role="group" aria-label="Estado">
+        <button class="seg-btn active" data-estado="todas" type="button">Todas</button>
+        <button class="seg-btn" data-estado="pronta" type="button">Prontas</button>
+        <button class="seg-btn" data-estado="prevista" type="button">Previstas</button>
+      </div>
+      <span class="contagem" id="contagem"></span>
+    </div>
+
+    <main class="grade" id="grade"></main>
+
+    <footer class="loja-rodape">
+      <a href="dados.html">Ver dados normalizados por empresa e tipo de arquivo →</a>
+    </footer>
+  </div>
+
+  <!-- Popup de contrato -->
+  <div class="overlay" id="overlay" hidden>
+    <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popNome" tabindex="-1" id="popup">
+      <header>
+        <div><h2 id="popNome"></h2><p id="popDesc"></p></div>
+        <span class="selo" id="popEstado"></span>
+        <button class="x" id="popFechar" type="button" aria-label="Fechar">×</button>
+      </header>
+      <div class="pop-grid">
+        <div class="pop-box"><small>Versão</small><strong id="popVersao"></strong><span id="popVersaoNota"></span></div>
+        <div class="pop-box"><small>Dono</small><strong id="popDono"></strong><span id="popDonoNota"></span></div>
+      </div>
+      <small class="lbl">Entrada</small>
+      <code class="contract" id="popEntrada"></code>
+      <small class="lbl">Saída</small>
+      <code class="contract" id="popSaida"></code>
+      <small class="lbl" id="popQuemLbl"></small>
+      <div class="chips" id="popQuem"></div>
+      <div class="pop-actions">
+        <button class="btn-primary grow" id="popCopiar" type="button">Copiar chamada</button>
+        <button class="btn-ghost" id="popFechar2" type="button">Fechar</button>
+      </div>
+      <p class="aviso" id="popAviso" hidden>Ainda não pode ser chamada — aguarde a versão pronta, não copie o rascunho.</p>
+      <p class="copiado" id="popOk" hidden>Chamada copiada — cole no seu app.</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

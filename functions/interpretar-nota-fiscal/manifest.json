@@ -1,0 +1,15 @@
+{
+  "nome": "Interpretar nota fiscal",
+  "descricao": "Lê o XML da NF-e e devolve a estrutura única",
+  "versao": "v2.2",
+  "versao_estado": "estável",
+  "versao_nota": "lê o XML de verdade desde set/2026: chave, emitente, itens, totais",
+  "dono": "Equipe Fiscal",
+  "dono_nota": "revê mudanças de regra",
+  "estado": "pronta",
+  "uso": "3 apps",
+  "quem_chama": ["App Conciliação", "App Fechamento Mensal", "App Conferência Fiscal"],
+  "entrada": "xml_nfe (texto do XML) → require(\"./ghw\")",
+  "saida": "estrutura_normalizada { chave, emitente, destinatario, dataEmissao, itens[], totais }",
+  "chamada": "const { interpretarNotaFiscal } = require(\"./ghw\");\nconst nf = interpretarNotaFiscal(xmlDaNFe);"
+}
