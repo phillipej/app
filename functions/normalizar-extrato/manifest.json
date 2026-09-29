@@ -11,5 +11,5 @@
   "quem_chama": ["App Conciliação", "App Fechamento Mensal"],
   "entrada": "arquivo_bruto (extrato) → ghw.importar()",
   "saida": "extrato_normalizado { empresa, lançamentos[] }",
-  "chamada": "const extrato = ghw.normalizarExtrato(arquivoBruto);"
+  "chamada": "const { normalizarExtrato } = require(\"./ghw\");\nconst extrato = normalizarExtrato(arquivoBruto);"
 }

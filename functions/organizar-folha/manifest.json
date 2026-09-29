@@ -11,5 +11,5 @@
   "quem_chama": ["App Folha Auxiliar"],
   "entrada": "arquivo_bruto (folha) → ghw.importar()",
   "saida": "folha_organizada { empresa, funcionários[] }",
-  "chamada": "const folha = ghw.organizarFolha(arquivoBruto);"
+  "chamada": "const { organizarFolha } = require(\"./ghw\");\nconst folha = organizarFolha(arquivoBruto);"
 }
